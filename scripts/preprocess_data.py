@@ -16,8 +16,12 @@ def preprocess_ssd(dataset):
         cv2.imwrite(os.path.join(output_images_dir, img_name), img_normalized * 255)
 
     # Convert annotations to SSD format
-    annotations_dir = f'data/{dataset}/annotations'
-    ssd_annotations_dir = f'data/{dataset}/annotations_ssd'
+    if dataset == "Pascal_VOC":
+        annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations'
+        yolo_annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations_ssd'
+    else:
+        annotations_dir = f'../data/{dataset}/annotations'
+        yolo_annotations_dir = f'../data/{dataset}/annotations_ssd'
 
     for ann_name in os.listdir(annotations_dir):
         ann_path = os.path.join(annotations_dir, ann_name)
@@ -39,8 +43,12 @@ def preprocess_yolo(dataset):
         cv2.imwrite(os.path.join(output_images_dir, img_name), img_normalized * 255)
 
     # Convert annotations to YOLO format
-    annotations_dir = f'data/{dataset}/annotations'
-    yolo_annotations_dir = f'data/{dataset}/annotations_yolo'
+    if dataset == "Pascal_VOC":
+        annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations'
+        yolo_annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations_yolo'
+    else:
+        annotations_dir = f'../data/{dataset}/annotations'
+        yolo_annotations_dir = f'../data/{dataset}/annotations_yolo'
 
     for ann_name in os.listdir(annotations_dir):
         ann_path = os.path.join(annotations_dir, ann_name)
@@ -62,8 +70,12 @@ def preprocess_frcnn(dataset):
         cv2.imwrite(os.path.join(output_images_dir, img_name), img_normalized * 255)
 
     # Convert annotations to Faster R-CNN format
-    annotations_dir = f'data/{dataset}/annotations'
-    frcnn_annotations_dir = f'data/{dataset}/annotations_frcnn'
+    if dataset == "Pascal_VOC":
+        annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations'
+        yolo_annotations_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/annotations_frcnn'
+    else:
+        annotations_dir = f'../data/{dataset}/annotations'
+        yolo_annotations_dir = f'../data/{dataset}/annotations_frcnn'
 
     for ann_name in os.listdir(annotations_dir):
         ann_path = os.path.join(annotations_dir, ann_name)
@@ -77,17 +89,17 @@ def preprocess_frcnn(dataset):
 if __name__ == '__main__':
     # Define the dataset you want to preprocess, either 'COCO' or 'Pascal_VOC'
     dataset = 'Pascal_VOC'
-    
+
     # Define the image_size depending on the chosen model
     image_size = 416  # for YOLO, for example
-    
+
     # Set input_images_dir and output_images_dir based on the dataset
     if dataset == 'COCO':
-        input_images_dir = 'data/COCO/train2017'
-        output_images_dir = f'data/COCO/train2017_preprocessed'
+        input_images_dir = '../data/COCO/train2017'
+        output_images_dir = f'../data/COCO/train2017_preprocessed'
     elif dataset == 'Pascal_VOC':
-        input_images_dir = 'data/Pascal_VOC/VOCdevkit/VOC2007/JPEGImages'
-        output_images_dir = f'data/Pascal_VOC/VOCdevkit/VOC2007/JPEGImages_preprocessed'
+        input_images_dir = '../data/Pascal_VOC/VOCdevkit/VOC2007/JPEGImages'
+        output_images_dir = f'../data/Pascal_VOC/VOCdevkit/VOC2007/JPEGImages_preprocessed'
     else:
         raise ValueError("Invalid dataset name. Choose either 'COCO' or 'Pascal_VOC'")
 
